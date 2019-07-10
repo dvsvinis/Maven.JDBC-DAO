@@ -27,9 +27,4 @@ public class DbUtil{
         System.err.println("Error code: " + e.getErrorCode());
     }
 
-//    public static void main(String[] args) {
-//        Connection connection = getConnection();
-//        System.out.println("Connected to database");
-//    }
-
 }

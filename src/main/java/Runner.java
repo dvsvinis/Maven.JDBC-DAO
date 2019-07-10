@@ -39,12 +39,8 @@ public class Runner {
 //        System.out.println("User updated");
 
         //Test delete()
-        run.delete(12);
-        System.out.println("User deleted");
-
-
-
- //       connection.close();
+//        run.delete(12);
+//        System.out.println("User deleted");
 
     }
 
