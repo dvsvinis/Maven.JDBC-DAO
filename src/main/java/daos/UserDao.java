@@ -3,7 +3,6 @@ package daos;
 import models.DbUtil;
 import models.User;
 
-import javax.sound.midi.Instrument;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,9 +42,10 @@ public class UserDao extends Dao<User>{
                 user.setState(rs.getString("state"));
                 user.setZipcode(rs.getString("zipcode"));
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             DbUtil.showErrorMessage(e);
         }
+
         return user;
     }
 

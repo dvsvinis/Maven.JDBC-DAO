@@ -15,32 +15,31 @@ public class Runner {
         UserDao run = new UserDao(DbUtil.getConnection());
 
         //Test Create user
-//        Connection connection = DbUtil.getConnection();
-//        UserDao userDao = new UserDao(connection);
 //        User user = new User(12, "Walt","Disney", "wdisney@disney.com", "Orland", "FL", "12345");
-//        userDao.create(user);
-//        connection.close();
+//        run.create(user);
+//        System.out.println("User created");
+//        run.connection.close();
 
-        //Test findById
- //       System.out.println(run.findById(3).toString());
+//        //Test findById
+        System.out.println(run.findById(3).toString());
 
-        //Test findAll()
-//        Connection connection = DbUtil.getConnection();
-//        UserDao userDao = new UserDao(connection);
-//        List<User> allUsers = userDao.findAll();
+//        //Test findAll()
+//         List<User> allUsers = run.findAll();
 //        for (User i : allUsers) {
 //            System.out.println(i.toString());
 //        }
 
-        //Test update()
-//        User user = run.findById(3);
-//        user.setCity("Hollywood");
-//        User updatedUser = run.update(user);
+//        //Test update()
+//        User user3 = run.findById(3);
+//        user3.setCity("Dallas");
+//        User updatedUser = run.update(user3);
 //        System.out.println("User updated");
 
-        //Test delete()
+//        //Test delete()
 //        run.delete(12);
 //        System.out.println("User deleted");
+//
+//        run.connection.close();
 
     }
 

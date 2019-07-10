@@ -5,7 +5,7 @@ import java.util.List;
 
 public abstract class Dao<T>{
 
-    protected final Connection connection;
+    public final Connection connection;
 
     public Dao(Connection connection){
         super();

@@ -10,15 +10,19 @@ public class DbUtil{
     public static final String USER = "user";
     public static final String PASSWORD = "standardUser";
 
-    public static Connection getConnection(){
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Connection Established to MYSQL Database");
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
+    public static final Connection connection= getConnection();
 
+
+    public static Connection getConnection(){
+        if(connection == null) {
+            try {
+                Connection tempConnection = DriverManager.getConnection(URL, USER, PASSWORD);
+                System.out.println("Connection Established to MYSQL Database");
+                return tempConnection;
+            } catch (SQLException e) {
+                System.err.println(e.getMessage());
+            }
+        }
         return connection;
     }
 
