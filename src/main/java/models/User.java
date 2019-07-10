@@ -1,4 +1,4 @@
-package daos;
+package models;
 
 public class User {
     private int id;
@@ -84,5 +84,17 @@ public class User {
         this.zipcode = zipcode;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                '}';
+    }
 
 }
