@@ -33,11 +33,14 @@ public class Runner {
 //        }
 
         //Test update()
-        User user = run.findById(3);
-        user.setCity("Hollywood");
-        User updatedUser = run.update(user);
-        System.out.println("User updated");
+//        User user = run.findById(3);
+//        user.setCity("Hollywood");
+//        User updatedUser = run.update(user);
+//        System.out.println("User updated");
 
+        //Test delete()
+        run.delete(12);
+        System.out.println("User deleted");
 
 
 
