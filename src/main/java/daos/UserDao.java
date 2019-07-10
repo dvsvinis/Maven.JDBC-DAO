@@ -19,8 +19,8 @@ public class UserDao extends Dao<User>{
                 "values(?,?,?,?,?,?,?)";
         private static final String GET_ONE = "SELECT * FROM user WHERE id = ?";
         private static final String GET_ALL = "SELECT * FROM user";
-        private static final String UPDATE = "UPDATE user SET user = ?, firstName = ?, lastName = ?, email = ?, " +
-                "city = ?, state = ? WHERE id = ?";
+        private static final String UPDATE = "UPDATE user SET firstName = ?, lastName = ?, email = ?, " +
+                "city = ?, state = ?, zipcode = ? WHERE id = ?";
         private static final String DELETE = "DELETE FROM user WHERE id = ?";
 
 
@@ -97,13 +97,13 @@ public class UserDao extends Dao<User>{
     public User update(User dto) {
         User user = null;
         try(PreparedStatement pstmt = this.connection.prepareStatement(UPDATE)){
+            pstmt.setInt(7, dto.getId());
             pstmt.setString(1, dto.getFirstName());
             pstmt.setString(2, dto.getLastName());
             pstmt.setString(3, dto.getEmail());
             pstmt.setString(4, dto.getCity());
             pstmt.setString(5, dto.getState());
             pstmt.setString(6, dto.getZipcode());
-            pstmt.setInt(7, dto.getId());
             pstmt.executeUpdate();
             user = this.findById(dto.getId());
         }catch (SQLException e){
