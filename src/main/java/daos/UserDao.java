@@ -3,6 +3,7 @@ package daos;
 import models.DbUtil;
 import models.User;
 
+import javax.sound.midi.Instrument;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,6 +51,23 @@ public class UserDao extends Dao<User>{
 
     public List<User> findAll() {
         List<User> listOfUsers = new ArrayList<>();
+        try(PreparedStatement pstmt = DbUtil.getConnection().prepareStatement(GET_ALL)) {
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setEmail(rs.getString("email"));
+                user.setCity(rs.getString("City"));
+                user.setState(rs.getString("State"));
+                user.setZipcode(rs.getString("Zipcode"));
+                listOfUsers.add(user);
+            }
+
+        } catch (SQLException e) {
+            DbUtil.showErrorMessage(e);
+        }
          return listOfUsers;
     }
 
@@ -79,13 +97,13 @@ public class UserDao extends Dao<User>{
     public User update(User dto) {
         User user = null;
         try(PreparedStatement pstmt = this.connection.prepareStatement(UPDATE)){
-            pstmt.setInt(1, dto.getId());
-            pstmt.setString(2, dto.getFirstName());
-            pstmt.setString(3, dto.getLastName());
-            pstmt.setString(4, dto.getEmail());
-            pstmt.setString(5, dto.getCity());
-            pstmt.setString(6, dto.getState());
-            pstmt.setString(7, dto.getZipcode());
+            pstmt.setString(1, dto.getFirstName());
+            pstmt.setString(2, dto.getLastName());
+            pstmt.setString(3, dto.getEmail());
+            pstmt.setString(4, dto.getCity());
+            pstmt.setString(5, dto.getState());
+            pstmt.setString(6, dto.getZipcode());
+            pstmt.setInt(7, dto.getId());
             pstmt.executeUpdate();
             user = this.findById(dto.getId());
         }catch (SQLException e){

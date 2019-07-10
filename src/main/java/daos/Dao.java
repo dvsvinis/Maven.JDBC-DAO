@@ -8,6 +8,7 @@ public abstract class Dao<T>{
     protected final Connection connection;
 
     public Dao(Connection connection){
+        super();
         this.connection = connection;
     }
 
