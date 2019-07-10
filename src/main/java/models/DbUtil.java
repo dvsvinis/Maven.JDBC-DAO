@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbUtil {
+public class DbUtil{
 
     public static final String URL = "jdbc:mysql://localhost:3306/friend";
     public static final String USER = "user";
@@ -17,9 +17,8 @@ public class DbUtil {
             System.out.println("Connection Established to MYSQL Database");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-        }finally {
-            connection.close();
         }
+
         return connection;
     }
 

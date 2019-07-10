@@ -34,13 +34,13 @@ public class UserDao extends Dao<User>{
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
                 user = new User();
-                user.setId(rs.getInt("Id"));
-                user.firstName(rs.getString("firstName"));
-                user.lastName(rs.getString("lastName"));
-                user.email(rs.getString("email"));
-                user.city(rs.getString("city"));
-                user.state(rs.getString("state"));
-                user.zipcode(rs.getString("zipcode"));
+                user.setId(rs.getInt("id"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setEmail(rs.getString("email"));
+                user.setCity(rs.getString("city"));
+                user.setState(rs.getString("state"));
+                user.setZipcode(rs.getString("zipcode"));
             }
         } catch (SQLException e){
             DbUtil.showErrorMessage(e);
@@ -54,17 +54,53 @@ public class UserDao extends Dao<User>{
     }
 
     public User create(User dto) {
-        return null;
+        int key = -1;
+        try(PreparedStatement pstmt = this.connection.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS)){
+            pstmt.setInt(1, dto.getId());
+            pstmt.setString(2, dto.getFirstName());
+            pstmt.setString(3, dto.getLastName());
+            pstmt.setString(4, dto.getEmail());
+            pstmt.setString(5, dto.getCity());
+            pstmt.setString(6, dto.getState());
+            pstmt.setString(7, dto.getZipcode());
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+
+            if (rs != null && rs.next()) {
+                key = rs.getInt(1);
+            }
+        }catch(SQLException e){
+            DbUtil.showErrorMessage(e);
+        }
+        return this.findById(key);
     }
 
     public User update(User dto) {
         User user = null;
-        return user;
+        try(PreparedStatement pstmt = this.connection.prepareStatement(UPDATE)){
+            pstmt.setInt(1, dto.getId());
+            pstmt.setString(2, dto.getFirstName());
+            pstmt.setString(3, dto.getLastName());
+            pstmt.setString(4, dto.getEmail());
+            pstmt.setString(5, dto.getCity());
+            pstmt.setString(6, dto.getState());
+            pstmt.setString(7, dto.getZipcode());
+            pstmt.executeUpdate();
+            user = this.findById(dto.getId());
+        }catch (SQLException e){
+            DbUtil.showErrorMessage(e);
+        }
+            return user;
     }
 
     public void delete(int id) {
+        try (PreparedStatement pstmt = this.connection.prepareStatement(DELETE)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            DbUtil.showErrorMessage(e);
+        }
     }
-
-
 
 }
